@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    command: bundle exec rails s -b 0.0.0.0
+    ports:
+      - 3000:3000
+    tty: true
+    stdin_open: true
+    environment:
+      - EDITOR=vi
+    env_file: app.env
+    volumes:
+      - ./:/home/appuser/home_dashboard
+      - ./.docker/.bundle:/home/appuser/home_dashboard/.bundle
+    restart: unless-stopped
+  db:
+      image: postgres:17
+      env_file: app.env
+      volumes:
+        - ./.docker/postgres/:/var/lib/postgresql/data
+      restart: unless-stopped
