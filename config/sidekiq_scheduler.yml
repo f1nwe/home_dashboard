@@ -1,0 +1,6 @@
+# config/sidekiq_scheduler.yml
+
+get_plant_rack_state_job:
+  every: ["10s"]
+  class: GetPlantRackStateJob
+  queue: recurring

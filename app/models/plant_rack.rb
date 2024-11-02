@@ -1,0 +1,2 @@
+class PlantRack < ApplicationRecord
+end

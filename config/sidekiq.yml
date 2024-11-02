@@ -1,0 +1,12 @@
+# config/sidekiq.yml
+
+:concurrency: 5
+:queues:
+  - [default, 3]   # Allocate 3 workers to 'default' queue
+  - [recurring, 2] # Allocate 2 workers to 'recurring' queue
+
+# Enable Sidekiq Failures
+:failures: true
+
+:scheduler:
+  :dynamic: true

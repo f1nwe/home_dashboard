@@ -1,7 +1,7 @@
 services:
-  app:
+  app: &app_base
     build: .
-    command: bundle exec rails s -b 0.0.0.0
+    command: /bin/sh -c "rm -f tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - 3000:3000
     tty: true
@@ -13,9 +13,22 @@ services:
       - ./:/home/appuser/home_dashboard
       - ./.docker/.bundle:/home/appuser/home_dashboard/.bundle
     restart: unless-stopped
+    depends_on:
+      - db
+      - redis
   db:
-      image: postgres:17
-      env_file: app.env
-      volumes:
-        - ./.docker/postgres/:/var/lib/postgresql/data
-      restart: unless-stopped
+    image: postgres:17
+    env_file: app.env
+    volumes:
+      - ./.docker/postgres/:/var/lib/postgresql/data
+    restart: unless-stopped
+  sidekiq:
+    <<: *app_base
+    command: sh -c "rm -f tmp/pids/sidekiq.pid && bundle exec sidekiq"
+    ports: []
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./.docker/redis/data:/data
