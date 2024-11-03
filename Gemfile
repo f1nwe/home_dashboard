@@ -7,6 +7,7 @@ gem 'rails', '~> 7.2.2'
 
 # Core gems
 gem 'bootsnap', require: false               # Reduces boot times through caching
+gem 'faraday'                                # HTTP client library
 gem 'importmap-rails'                        # JavaScript with ESM import maps
 gem 'jbuilder'                               # Build JSON APIs with ease
 gem 'pg', '~> 1.1'                           # PostgreSQL as the database for Active Record
@@ -27,11 +28,11 @@ group :development, :test do
   gem 'brakeman', require: false # Security analysis
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude' # Debugging Rails apps
   gem 'ostruct'                                                          # OpenStruct with a
-  gem 'pry'                                                              # Enhanced Ruby console
   gem 'rubocop-rails-omakase', require: false                            # Ruby styling with RuboCop
 end
 
 group :development do
+  gem 'annotate'
   gem 'web-console' # Console on exceptions pages
 end
 
