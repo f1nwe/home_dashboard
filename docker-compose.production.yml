@@ -16,13 +16,11 @@ services:
     depends_on:
       - db
       - redis
-    secrets:
-      - id_rsa
   db:
     image: postgres:17
     env_file: app.env
     volumes:
-      - ./.docker/postgres/wrapper/:/var/lib/postgresql/data
+      - ./.docker/postgres/:/var/lib/postgresql/data
     restart: unless-stopped
   sidekiq:
     <<: *app_base
@@ -34,6 +32,3 @@ services:
       - "6379:6379"
     volumes:
       - ./.docker/redis/data:/data
-secrets:
-   id_rsa:
-     file: ~/.ssh/t460p

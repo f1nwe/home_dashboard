@@ -2,16 +2,23 @@
 
 source 'https://rubygems.org'
 
+# active record extension
+gem 'activerecord-import'
+
 # Rails framework
 gem 'rails', '~> 7.2.2'
 
 # Core gems
 gem 'bootsnap', require: false               # Reduces boot times through caching
+gem 'bootstrap'                              # Stylesheets with Bootstrap
+gem 'chartkick'                              # Create beautiful JavaScript charts with one line
 gem 'faraday'                                # HTTP client library
 gem 'importmap-rails'                        # JavaScript with ESM import maps
 gem 'jbuilder'                               # Build JSON APIs with ease
 gem 'pg', '~> 1.1'                           # PostgreSQL as the database for Active Record
 gem 'puma', '>= 5.0'                         # Puma web server
+gem 'sassc-rails'                            # Stylesheets with SASS
+gem 'slim-rails'
 gem 'sprockets-rails'                        # Asset pipeline for Rails
 gem 'stimulus-rails'                         # Hotwire's modest JavaScript framework
 gem 'turbo-rails'                            # Hotwire's SPA-like page accelerator
@@ -33,6 +40,8 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'capistrano', require: false
+  gem 'capistrano-decompose', require: false
   gem 'web-console' # Console on exceptions pages
 end
 

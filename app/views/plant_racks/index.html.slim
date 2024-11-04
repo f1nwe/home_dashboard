@@ -1,0 +1,12 @@
+.row
+  hr
+  - @plant_rack.shelves.each.with_index do |shelf, index|
+    - next if index.in?([2,3])
+    h4 Shelf #{shelf.arrangement}
+    - shelf.plants.each do |plant|
+      - next if plant.sensors_measurements.empty?
+      .col-md-6
+        - last_measurement = plant.sensors_measurements.last
+        h5 Plant #{plant.arrangement}, Light is #{last_measurement.light ? 'ON' : 'OF'}, current soil moisture is #{last_measurement.soil_moisture_raw}
+        = line_chart Plant::PlantSensorsChart.new(plant), min: 0, max: 4095, xmin: 2.weeks.ago.to_date.to_s, xmax: 2.days.ago.to_date.to_s
+    hr

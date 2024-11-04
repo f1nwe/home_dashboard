@@ -20,6 +20,9 @@ RUN mkdir -p "$APP_PATH/.docker/.bundle"
 
 RUN chown -R $APP_USER:$APP_GROUP $APP_PATH
 
+RUN apt update -y
+RUN apt install -y nodejs openssh-client
+
 WORKDIR $APP_PATH
 
 USER $APP_USER
