@@ -16,6 +16,8 @@ services:
     depends_on:
       - db
       - redis
+    secrets:
+      - id_rsa
   db:
     image: postgres:17
     env_file: app.env
@@ -32,3 +34,6 @@ services:
       - "6379:6379"
     volumes:
       - ./.docker/redis/data:/data
+secrets:
+   id_rsa:
+     file: ~/.ssh/t460p
